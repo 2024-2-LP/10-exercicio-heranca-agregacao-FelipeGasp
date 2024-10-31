@@ -89,18 +89,18 @@ public class Consultoria {
     return desenvolvedoresAux;
   }
   public Desenvolvedor buscarMenorSalario(){
+    if(desenvolvedores.isEmpty()) {
+      return null;
+    }
     Double menorSalario = desenvolvedores.get(0).calcularSalario();
-
+    Desenvolvedor desenvolvedorMenor = desenvolvedores.get(0);
     for(Desenvolvedor desenvolvedor: desenvolvedores){
-      if(menorSalario < desenvolvedor.calcularSalario()){
+      if(menorSalario > desenvolvedor.calcularSalario()){
         menorSalario = desenvolvedor.calcularSalario();
+        desenvolvedorMenor = desenvolvedor;
       }
     }
-    for(Desenvolvedor desenvolvedor:desenvolvedores){
-      if(desenvolvedor.calcularSalario()==menorSalario){
-        return desenvolvedor;
-      }
+    return desenvolvedorMenor;
+
     }
-    return desenvolvedores.get(0);
-  }
 }
