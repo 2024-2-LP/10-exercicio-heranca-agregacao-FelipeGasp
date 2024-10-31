@@ -128,4 +128,12 @@ public class Consultoria {
     }
     return desenvolvedorsTech;
   }
+  public Double getTotalSalariosPorTecnologia(String tecnologia){
+    List<Desenvolvedor> desenvolvedors = buscarPorTecnologia(tecnologia);
+    Double totalSalario = 0.0;
+    for(Desenvolvedor desenvolvedor : desenvolvedors){
+      totalSalario+= desenvolvedor.calcularSalario();
+    }
+    return totalSalario;
+  }
 }
