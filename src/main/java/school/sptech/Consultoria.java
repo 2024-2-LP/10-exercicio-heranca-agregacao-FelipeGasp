@@ -105,7 +105,27 @@ public class Consultoria {
   public List<Desenvolvedor> buscarPorTecnologia(String tecnologia){
     List<Desenvolvedor> desenvolvedorsTech = new ArrayList<>();
     for (Desenvolvedor desenvolvedor : desenvolvedores) {
+      if(desenvolvedor instanceof DesenvolvedorWeb) {
+        if (((DesenvolvedorWeb) desenvolvedor).getFrontend().equals(tecnologia)) {
+          desenvolvedorsTech.add(desenvolvedor);
+        }
+        if (((DesenvolvedorWeb) desenvolvedor).getBackend().equals(tecnologia)) {
+          desenvolvedorsTech.add(desenvolvedor);
+        }
+        if (((DesenvolvedorWeb) desenvolvedor).getSgbd().equals(tecnologia)) {
+          desenvolvedorsTech.add(desenvolvedor);
+        }
+      }
+      if(desenvolvedor instanceof DesenvolvedorMobile){
+        if(((DesenvolvedorMobile)desenvolvedor).getPlataforma().equals(tecnologia)){
+          desenvolvedorsTech.add(desenvolvedor);
+        }
+        if(((DesenvolvedorMobile)desenvolvedor).getLinguagem().equals(tecnologia)){
+          desenvolvedorsTech.add(desenvolvedor);
+        }
+      }
 
     }
+    return desenvolvedorsTech;
   }
 }
