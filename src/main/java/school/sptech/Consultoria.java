@@ -101,6 +101,11 @@ public class Consultoria {
       }
     }
     return desenvolvedorMenor;
+    }
+  public List<Desenvolvedor> buscarPorTecnologia(String tecnologia){
+    List<Desenvolvedor> desenvolvedorsTech = new ArrayList<>();
+    for (Desenvolvedor desenvolvedor : desenvolvedores) {
 
     }
+  }
 }
