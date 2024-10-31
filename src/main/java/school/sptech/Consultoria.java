@@ -1,4 +1,106 @@
 package school.sptech;
 
+import school.sptech.especialistas.DesenvolvedorMobile;
+import school.sptech.especialistas.DesenvolvedorWeb;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Consultoria {
+  private String nome;
+  private Integer vagas;
+  private List<Desenvolvedor> desenvolvedores;
+
+  public Consultoria(String nome, Integer vagas, List<Desenvolvedor> desenvolvedores) {
+    this.nome = nome;
+    this.vagas = vagas;
+    this.desenvolvedores = desenvolvedores;
+  }
+
+  public Consultoria() {
+  }
+
+  public Consultoria(Integer vagas, String nome) {
+    this.vagas = vagas;
+    this.nome = nome;
+  }
+
+  public Integer getVagas() {
+    return vagas;
+  }
+
+  public void setVagas(Integer vagas) {
+    this.vagas = vagas;
+  }
+
+  public String getNome() {
+    return nome;
+  }
+
+  public void setNome(String nome) {
+    this.nome = nome;
+  }
+
+  public void contratar (Desenvolvedor desenvolvedor){
+    if(desenvolvedores.size()>= vagas) {
+      System.out.println("Não é possivel adicionar, não há vagas");
+    }else{
+      desenvolvedores.add(desenvolvedor);
+    }
+  }
+  public Boolean contratarFullstack(DesenvolvedorWeb desenvolvedor){
+    if(desenvolvedor.isFullstack()){
+      if(desenvolvedores.size()< vagas){
+        desenvolvedores.add(desenvolvedor);
+        return true;
+      }else{
+        System.out.println("Não é possivel adicionar, não há vagas");
+        return false;
+      }
+    }else{
+      System.out.println("Não foi possivel verificar se o desenvolvedor é fullstack");
+      return false;
+    }
+  }
+  public Double getTotalSalarios(){
+    Double somaTotal = 0.0;
+    for (Desenvolvedor desenvolvedor:desenvolvedores){
+      somaTotal+= desenvolvedor.calcularSalario();
+    }
+    return somaTotal;
+  }
+  public Integer qtdDesenvolvedoresMobile(){
+    Integer cont = 0;
+    for(Desenvolvedor desenvolvedor : desenvolvedores){
+      if(desenvolvedor instanceof DesenvolvedorMobile){
+        cont++;
+      }
+    }
+    return cont;
+  }
+  public List<Desenvolvedor> buscarPorSalarioMaiorIgualQue(Double salario){
+    List<Desenvolvedor> desenvolvedoresAux = new ArrayList<>();
+
+    for(Desenvolvedor desenvolvedor:desenvolvedores){
+      if(desenvolvedor.calcularSalario()>=salario){
+        desenvolvedoresAux.add(desenvolvedor);
+      }
+    }
+    return desenvolvedoresAux;
+  }
+  public Desenvolvedor buscarMenorSalario(){
+    Double menorSalario = desenvolvedores.get(0).calcularSalario();
+
+    for(Desenvolvedor desenvolvedor: desenvolvedores){
+      if(menorSalario < desenvolvedor.calcularSalario()){
+        menorSalario = desenvolvedor.calcularSalario();
+      }
+    }
+    for(Desenvolvedor desenvolvedor:desenvolvedores){
+      if(desenvolvedor.calcularSalario()==menorSalario){
+        return desenvolvedor;
+      }
+    }
+    return desenvolvedores.get(0);
+  }
 }
